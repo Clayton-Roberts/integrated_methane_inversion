@@ -2,13 +2,14 @@
 ## Overview:
 
 This directory contains the source code for setting up and running the
-[Integrated Methane Inversion](https://carboninversion.com/) with GEOS-Chem.
+[Integrated Methane Inversion](https://carboninversion.com/) with GEOS-Chem. This fork has been created specifically to accomodate the needs of scientists at SRON who use the IMI on the Dutch National Supercomputer Snellius.
 
 
 ## Documentation:
 
 Please see the [IMI readthedocs site](https://imi.readthedocs.io)
 
+## New header
 
 ## References:
 
