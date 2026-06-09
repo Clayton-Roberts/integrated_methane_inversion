@@ -7,7 +7,23 @@ This directory contains the source code for setting up and running the
 
 ## Documentation:
 
-Please see the [IMI readthedocs site](https://imi.readthedocs.io)
+For official IMI documentation, please see the [IMI readthedocs site](https://imi.readthedocs.io).
+
+## SRON installation steps
+
+1. Step one: clone the SRON-specific fork of the IMI:
+```shell
+git clone https://github.com/Clayton-Roberts/integrated_methane_inversion.git
+```
+
+2. Move into the IMI directory you've created and clone GCClassic. Use the -recursive flag to download links from previous commits: 
+```shell
+cd integrated_methane_inversion
+git clone https://github.com/geoschem/GCClassic.git
+git submodule update --init –recursive
+```
+
+ (to download links from previous commits)
 
 ## New header
 
