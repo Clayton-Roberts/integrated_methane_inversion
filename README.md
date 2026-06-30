@@ -20,7 +20,8 @@ git clone https://github.com/Clayton-Roberts/integrated_methane_inversion.git
 ```shell
 cd integrated_methane_inversion
 git clone https://github.com/geoschem/GCClassic.git
-git submodule update --init –recursive
+cd GCClassic
+git submodule update --init –-recursive
 ```
 
  (to download links from previous commits)
