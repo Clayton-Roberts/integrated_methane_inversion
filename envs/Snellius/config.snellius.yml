@@ -11,7 +11,7 @@ UseGCHP: false
 
 ## Period of interest
 StartDate: 20220101
-EndDate: 20220105
+EndDate: 20220112
 SpinupMonths: 1
 
 CH4:
@@ -23,7 +23,7 @@ CH4:
   ## Currently, only "BlendedTROPOMI" and "TROPOMI" are supported on AWS. If
   ## "Other" is selected, the user must specify the path where observations are
   ## located under "Advanced settings" in this file.
-  SatelliteProduct: "BlendedTROPOMI"
+  SatelliteProduct: "TROPOMI"
   ## Use observations over water? Set to false to filter out water observations
   UseWaterObs: false
   OptimizeOH: false
