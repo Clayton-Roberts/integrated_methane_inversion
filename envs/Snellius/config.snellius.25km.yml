@@ -265,7 +265,7 @@ DataPathObs: "/projects/0/src17245/TROPOMI/CH4/Operational/"
 
 ## GEOS-Chem environment file (with fortran compiler, netcdf libraries, etc.)
 ##   NOTE: Copy your own file in the envs/ directory within the IMI
-GEOSChemEnv: "envs/Harvard-Cannon/gcclassic.rocky+gnu12.minimal.env"
+GEOSChemEnv: "envs/Snellius/gcclassic.rocky+gnu12.minimal.env"
 
 ## Python environment file (this is normally one or two lines)
 PythonEnv: "envs/Harvard-Cannon/python.env"
