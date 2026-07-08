@@ -26,7 +26,9 @@ git submodule update --init –-recursive
 
  (to download links from previous commits)
 
-3. Need to describe altering the following parts of the readme: OutputPath, DataPath (though maybe not...), DataPathObs (Though maybe not...), GEOSChemEnv (though maybe not...), 
+3. Need to describe altering the following parts of the readme: OutputPath, DataPath (though maybe not...), DataPathObs (Though maybe not...), GEOSChemEnv (though maybe not...)
+
+4. Need to include the bit about altering the ~/.bashrc file, installing miniconda.
 ## New header
 
 ## References:
