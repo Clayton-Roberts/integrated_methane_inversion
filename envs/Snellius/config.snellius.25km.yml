@@ -255,13 +255,13 @@ UseBCsForRestart: false
 ##------------------------------------------------------------------
 
 ## Path for IMI runs and output
-OutputPath: "/n/holylfs06/LABS/jacob_lab2/Lab/$USER"
+OutputPath: "/projects/0/src17245/croberts/imi_output"
 
 ## Path to GEOS-Chem input data
-DataPath: "/n/holylfs06/LABS/jacob_lab/Everyone/GEOS-CHEM/gcgrid/gcdata/ExtData"
+DataPath:  "/projects/0/src17245/IMI/Inputs/ExtData"
 
 ## Path to satellite data
-DataPathObs: "/n/holylfs05/LABS/jacob_lab/imi/ch4/blended"
+DataPathObs: "/projects/0/src17245/TROPOMI/CH4/Operational/"
 
 ## GEOS-Chem environment file (with fortran compiler, netcdf libraries, etc.)
 ##   NOTE: Copy your own file in the envs/ directory within the IMI
