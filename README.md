@@ -26,9 +26,53 @@ git submodule update --init –-recursive
 
  (to download links from previous commits)
 
-3. Need to describe altering the following parts of the readme: OutputPath, DataPath (though maybe not...), DataPathObs (Though maybe not...), GEOSChemEnv (though maybe not...)
+3. Download Anaconda into your home directory. Run the command 
+```
+bash ./Anaconda.sh
+```
+and accept everything. Then make sure the following is in your .bashrc file in your home directory (make sure to change croberts to your username!):
+```
+# >>> conda initialize >>>
+# !! Contents within this block are managed by 'conda init' !!
+__conda_setup="$('/home/croberts/miniconda3/bin/conda' 'shell.bash' 'hook' 2> /dev/null)"
+if [ $? -eq 0 ]; then
+    eval "$__conda_setup"
+else
+    if [ -f "/home/croberts/miniconda3/etc/profile.d/conda.sh" ]; then
+        . "/home/croberts/miniconda3/etc/profile.d/conda.sh"
+    else
+        export PATH="/home/croberts/miniconda3/bin:$PATH"
+    fi
+fi
+unset __conda_setup
+# <<< conda initialize <<<
+```
 
-4. Need to include the bit about altering the ~/.bashrc file, installing miniconda.
+4. Navigate to 
+```
+envs/Snellius
+```
+and edit the last line of imi_env.yml so that the prefix references your own home directory. Then run the command
+
+```
+conda create --file imi_env.yml
+```
+
+When that's finished (it may take some time), activate this environment via 
+
+```
+conda activate imi_env
+```
+
+and install this custom package from Github that we need:
+
+```
+python -m pip install git+https://github.com/LiamBindle/sparselt.git
+```
+
+5. Need to describe altering the following parts of the readme: OutputPath, DataPath (though maybe not...), DataPathObs (Though maybe not...), GEOSChemEnv (though maybe not...)
+
+
 ## New header
 
 ## References:

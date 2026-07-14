@@ -255,7 +255,7 @@ UseBCsForRestart: false
 ##------------------------------------------------------------------
 
 ## Path for IMI runs and output
-OutputPath: "/projects/0/src17245/croberts/imi_output"
+OutputPath: "/scratch-shared/croberts/imi_output"
 
 ## Path to GEOS-Chem input data
 DataPath:  "/projects/0/src17245/IMI/Inputs/ExtData"
