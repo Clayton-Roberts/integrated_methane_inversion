@@ -268,7 +268,13 @@ DataPathObs: "/projects/0/src17245/TROPOMI/CH4/Operational/"
 GEOSChemEnv: "envs/Snellius/gcclassic.rocky+gnu12.minimal.env"
 
 ## Python environment file (this is normally one or two lines)
-PythonEnv: "envs/Harvard-Cannon/python.env"
+PythonEnv: "envs/Snellius/python.env"
+
+# CLAYTON ADDED THE TWO LINES BELOW.
+## Conda environment file
+## See envs/README to create the Conda environment specified below
+CondaEnv: "imi_env"
+CondaFile: "~/.bashrc"
 
 ## Download initial restart file from AWS S3?
 ##   NOTE: Must have AWS CLI enabled

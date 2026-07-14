@@ -81,18 +81,52 @@ else
     ConfigFile="config.yml"
 fi
 
+# CLAYTON COMMENTED THE BELOW OUT
 # Get the conda environment name and source file
 # These variables are sourced manually because
 # we need the python environment to parse the yaml file
-PythonEnv=$(grep '^PythonEnv:' ${ConfigFile} |
-    sed 's/PythonEnv://' |
+# PythonEnv=$(grep '^PythonEnv:' ${ConfigFile} |
+#     sed 's/PythonEnv://' |
+#     sed 's/#.*//' |
+#     sed 's/^[[:space:]]*//' |
+#     tr -d '"')
+
+# CLAYTON COMMENTED THE BELOW OUT
+# Load conda/mamba/micromamba and append the current directory to PYTHONPATH
+# source $PythonEnv
+# export PYTHONPATH=${PYTHONPATH}:$(pwd -P)
+
+# =================================
+# CLAYTON ADDED FROM HERE TO...
+echo "Using config file: ${ConfigFile}"
+# # Get the conda environment name and source file
+# # These variables are sourced manually because
+# # we need the python environment to parse the yaml file
+CondaEnv=$(grep '^CondaEnv:' ${ConfigFile} |
+    sed 's/CondaEnv://' |
     sed 's/#.*//' |
     sed 's/^[[:space:]]*//' |
     tr -d '"')
+CondaFile=$(eval echo $(grep '^CondaFile:' ${ConfigFile} |
+    sed 's/CondaFile://' |
+    sed 's/#.*//' |
+    sed 's/^[[:space:]]*//' |
+    tr -d '"'))
+# Load conda/mamba/micromamba e.g. ~/.bashrc
+echo "Using conda file: ${CondaFile}"
+# source $CondaFile
+bash --rcfile "$CondaFile" -i -c "echo 'Sourced $CondaFile'"
 
-# Load conda/mamba/micromamba and append the current directory to PYTHONPATH
-source $PythonEnv
+# Activate Conda environment
+printf "\nActivating conda environment: ${CondaEnv}\n"
+# conda init
+source "$(conda info --base)/etc/profile.d/conda.sh"
+conda activate ${CondaEnv}
+
 export PYTHONPATH=${PYTHONPATH}:$(pwd -P)
+
+# THIS ENDS THE BLOCK CLAYTON ADDED
+# =================================
 
 # Parsing the config file
 eval $(python src/utilities/parse_yaml.py ${ConfigFile})
