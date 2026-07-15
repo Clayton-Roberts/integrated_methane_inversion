@@ -2,6 +2,7 @@
 # -*- coding: utf-8 -*-
 
 import os
+import glob
 import sys
 import warnings
 import datetime
@@ -729,7 +730,8 @@ def estimate_averaging_kernel(
     # Observations in region of interest
     # ----------------------------------
     # Paths to satellite data files
-    satellite_files = [f for f in os.listdir(satellite_cache) if ".nc" in f]
+    #satellite_files = [f for f in os.listdir(satellite_cache) if ".nc" in f]
+    satellite_files = glob.glob(satellite_cache+'/*/*/*/*.nc')
     satellite_paths = [os.path.join(satellite_cache, f) for f in satellite_files]
 
     if config['UseGCHP']:
