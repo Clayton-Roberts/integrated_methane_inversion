@@ -36,7 +36,8 @@ submit_job() {
 #   submit_slurm_job $JobArguments
 submit_slurm_job() {
     if [[ $1 = "true" ]]; then
-        sbatch -N 1 \
+        sbatch --export=ALL \
+            -N 1 \
             --mem $2 \
             -c $3 \
             -t $4 \
@@ -44,7 +45,8 @@ submit_slurm_job() {
             -o imi_output.tmp \
             -W ${@:6}; wait;
     else
-        sbatch -N 1 \
+        sbatch --export=ALL \
+            -N 1 \
             --mem $2 \
             -c $3 \
             -t $4 \
