@@ -70,7 +70,7 @@ and install this custom package from Github that we need:
 python -m pip install git+https://github.com/LiamBindle/sparselt.git
 ```
 
-5. Need to describe altering the following parts of the readme: OutputPath, DataPath (though maybe not...), DataPathObs (Though maybe not...), GEOSChemEnv (though maybe not...)
+5. Things we can tell Matthieu/Shubham: just altered src/utilities/common to alter submit_slurm_job to fix the environment issues (for now). Also edited imi_preview.py to follow Matthieu's advise on recognizing where the TROPOMI observations are.
 
 
 ## New header
