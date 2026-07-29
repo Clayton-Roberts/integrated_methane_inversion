@@ -5,7 +5,7 @@ echo "running {END} jacobian simulations" >> {InversionPath}/imi_output.log
 rm -f .error_status_file.txt
 
 if [[ $SchedulerType = "slurm" || $SchedulerType = "tmux" ]]; then
-    sbatch --array={START}-{END}{JOBS} --mem $RequestedMemory \
+    sbatch --export=ALL --array={START}-{END}{JOBS} --mem $RequestedMemory \
         -c $RequestedCPUs \
         -N 1 \
         -t $RequestedTime \

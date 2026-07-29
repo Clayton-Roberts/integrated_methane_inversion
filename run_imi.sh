@@ -143,8 +143,6 @@ else
         printf "\nIMI $RunName Aborted\n"
         exit 1
     else
-        # Clay added this:
-        module purge
         printf "\nLoading GEOS-Chem environment: ${GEOSChemEnv}\n"
             source ${GEOSChemEnv}
     fi
