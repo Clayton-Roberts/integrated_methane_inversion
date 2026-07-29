@@ -70,10 +70,16 @@ and install this custom package from Github that we need:
 python -m pip install git+https://github.com/LiamBindle/sparselt.git
 ```
 
-5. Things we can tell Matthieu/Shubham: just altered src/utilities/common to alter submit_slurm_job to fix the environment issues (for now). Also edited imi_preview.py to follow Matthieu's advise on recognizing where the TROPOMI observations are.
+
+## Things to discuss with Matthieu/Shubham: 
+
+1. I altered surc/utilities/common.sh so that submit_slurm_job has --export=ALL in it; this passes the loaded environment .env file through to job nodes. 
+
+2. I needed to alter the .env file to make sure that our MPI and NETCDF libraries are linked correctly; we have EasyBuild-built modules instead of FASRC-built modules.
+
+3. I also needed to alter src/geoschem_run_scripts/submit_jacobian_simulations_array.sh as sbatch is called here directly instead of using the function defined in common.sh; thus, we also needed to include --export=ALL to make sure that our loaded modules are passed through to the job nodes.
 
 
-## New header
 
 ## References:
 
