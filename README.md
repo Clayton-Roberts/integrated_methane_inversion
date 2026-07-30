@@ -79,7 +79,7 @@ python -m pip install git+https://github.com/LiamBindle/sparselt.git
 
 3. I also needed to alter src/geoschem_run_scripts/submit_jacobian_simulations_array.sh as sbatch is called here directly instead of using the function defined in common.sh; thus, we also needed to include --export=ALL to make sure that our loaded modules are passed through to the job nodes.
 
-
+4. I think there is an error on line 57 of make_jacobian_icbc.py as this is an incorrectly formatted f-string.
 
 ## References:
 
