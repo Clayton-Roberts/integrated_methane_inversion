@@ -565,9 +565,6 @@ cd \${RUNDIR}" jacobian_runs/run_jacobian_simulations.sh
         # Submit job to job scheduler
         source submit_jacobian_simulations_array.sh
 
-        # Clay's proposal: remove everything below this line inside of submit_jacobian_simulations_array.sh,
-        # including Shubham's workaround. This way it is explicit what we are doing, instead of relying on 
-        # this wait statement.
         if "$LognormalErrors"; then
             # Submit background simulation to job scheduler
             printf "\n=== SUBMITTING BACKGROUND SIMULATION ===\n"
