@@ -126,7 +126,7 @@ if __name__ == "__main__":
     print("End:", gc_enddate)
 
     # Get satellite data filenames for the desired date range
-    allfiles = glob.glob(f"{satellite_cache}/*.nc")
+    allfiles = glob.glob(f"{satellite_cache}/**/*.nc", recursive=True)
     sat_files = []
     for index in range(len(allfiles)):
         filename = allfiles[index]
