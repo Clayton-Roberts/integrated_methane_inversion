@@ -2,7 +2,7 @@
 ## Documentation @ https://imi.readthedocs.io/en/latest/getting-started/imi-config-file.html
 
 ## General
-RunName: "Test_25km_Permian"
+RunName: "Test_25km_Permian" # "Test_25km_Permian"
 Species: "CH4"
 SchedulerType: "slurm"
 SafeMode: false
@@ -10,8 +10,8 @@ S3Upload: false
 UseGCHP: false
 
 ## Period of interest
-StartDate: 20220101
-EndDate: 20220131
+StartDate: 20220101 #20220101
+EndDate: 20220131 #20220131
 SpinupMonths: 1
 
 CH4:
@@ -150,7 +150,7 @@ SetupPosteriorRun: false
 ##   Turn on/off different steps in performing the inversion
 DoHemcoPriorEmis: true
 DoSpinup: true
-DoJacobian: true
+DoJacobian: false
 ReDoJacobian: false
 DoInversion: false
 DoPosterior: false

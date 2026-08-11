@@ -435,6 +435,13 @@ create_simulation_dir() {
         fi
     fi
 
+    # Clay added this line here.
+    # The Restart file that is symlinked to contains SpeciesBC_CH4, not SpeciesRst. So for the runs apart from the prior run, we
+    # need to alter the HEMCO_Config.rc file to expect to load SPC_CH4 from SpeciesBC_CH4 and not SpeciesRst_CH4. 
+    if [[ $x -gt 0 ]]; then
+        sed -i 's/SpeciesRst_CH4/SpeciesBC_CH4/g' HEMCO_Config.rc
+    fi
+
     # Navigate back to top-level directory
     cd ../..
 }
@@ -558,6 +565,9 @@ cd \${RUNDIR}" jacobian_runs/run_jacobian_simulations.sh
         # Submit job to job scheduler
         source submit_jacobian_simulations_array.sh
 
+        # Clay's proposal: remove everything below this line inside of submit_jacobian_simulations_array.sh,
+        # including Shubham's workaround. This way it is explicit what we are doing, instead of relying on 
+        # this wait statement.
         if "$LognormalErrors"; then
             # Submit background simulation to job scheduler
             printf "\n=== SUBMITTING BACKGROUND SIMULATION ===\n"

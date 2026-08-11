@@ -70,6 +70,11 @@ and install this custom package from Github that we need:
 python -m pip install git+https://github.com/LiamBindle/sparselt.git
 ```
 
+## Extra steps for when you want to set up a project
+
+1. You need to have the appropriate boundary condition files downloaded for your project. Check out the script at `/projects/0/src17245/IMI/Inputs/ExtData/GCinput/download_boundary_files.sh` to see how to do this.
+
+2. You need to make sure that you have the GEOS-FP meteorological data to run your simulation. For example, if you were using North American (NA) data at 25km resolution, this data needs to be located at `/projects/0/src17245/IMI/Inputs/ExData/GEOS_0.25x0.3125_NA`, with the appropriate date range in the sub-folders. Importantly, this should NOT be located in the `Meteo` folder; the IMI expects it to be just underneath `ExtData`.
 
 ## Things to discuss with Matthieu/Shubham: 
 
@@ -80,6 +85,8 @@ python -m pip install git+https://github.com/LiamBindle/sparselt.git
 3. I also needed to alter src/geoschem_run_scripts/submit_jacobian_simulations_array.sh as sbatch is called here directly instead of using the function defined in common.sh; thus, we also needed to include --export=ALL to make sure that our loaded modules are passed through to the job nodes.
 
 4. I think there is an error on line 57 of make_jacobian_icbc.py as this is an incorrectly formatted f-string.
+
+5. Also needed to make some changes to the end of create_simulation_dir to get the HEMCO_Config.rc file to read in the correct methane field.
 
 ## References:
 
