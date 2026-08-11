@@ -24,21 +24,23 @@ printf "\n=== PARSING CONFIG FILE ===\n"
 invPath={INVERSION_PATH}
 configFile={CONFIG_FILE}
 
-# Get configuration
-#  This defines $StartDate, $EndDate, $RunName
-#  It also define $PriorError, $ObsError, $Gamma, $PrecomputedJacobian
-#  Parsing the config file here facilitates generation of inversion ensembles
-#  All that needs to be done is to edit the config file for $PriorError,
-#   $ObsError, and $Gamma
-#  Make sure $PrecomputedJacobian is true, and then re-run this script
-#   (or run_imi.sh with only the $DoInversion module switched on in config.yml).
-PythonEnv=$(grep '^PythonEnv:' ${invPath}/${configFile} |
-    sed 's/PythonEnv://' |
-    sed 's/#.*//' |
-    sed 's/^[[:space:]]*//' |
-    tr -d '"')
-echo $PythonEnv
-source ${invPath}/${PythonEnv}
+# CLAYTON COMMENTED THE BELOW OUT
+# # Get configuration
+# #  This defines $StartDate, $EndDate, $nBufferClusters, $RunName
+# #  It also define $PriorError, $ObsError, $Gamma, $PrecomputedJacobian
+# #  Parsing the config file here facilitates generation of inversion ensembles
+# #  All that needs to be done is to edit the config file for $PriorError,
+# #   $ObsError, and $Gamma
+# #  Make sure $PrecomputedJacobian is true, and then re-run this script
+# #   (or run_imi.sh with only the $DoInversion module switched on in config.yml).
+# PythonEnv=$(grep '^PythonEnv:' ${invPath}/${configFile} |
+#     sed 's/PythonEnv://' |
+#     sed 's/#.*//' |
+#     sed 's/^[[:space:]]*//' |
+#     tr -d '"')
+# echo $PythonEnv
+# source ${invPath}/${PythonEnv}
+# CLAYTON is leaving the line below uncommented; I think python should already be loaded.
 eval $(python ${invPath}/src/utilities/parse_yaml.py ${invPath}/${configFile})
 
 #=======================================================================
