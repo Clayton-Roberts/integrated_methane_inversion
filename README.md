@@ -58,18 +58,6 @@ and edit the last line of imi_env.yml so that the prefix references your own hom
 conda create --file imi_env.yml
 ```
 
-When that's finished (it may take some time), activate this environment via 
-
-```
-conda activate imi_env
-```
-
-and install this custom package from Github that we need:
-
-```
-python -m pip install git+https://github.com/LiamBindle/sparselt.git
-```
-
 ## Extra steps for when you want to set up a project
 
 1. You need to have the appropriate boundary condition files downloaded for your project. Check out the script at `/projects/0/src17245/IMI/Inputs/ExtData/GCinput/download_boundary_files.sh` to see how to do this.
