@@ -27,6 +27,7 @@ dependencies:
 - shapely=2.0.4
 - xarray=2024.6.0
 - xesmf=0.8.6
+- pygeohash=1.2.0
 - pip
 - pip:
   - git+https://github.com/LiamBindle/sparselt.git
