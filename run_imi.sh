@@ -3,7 +3,7 @@
 #SBATCH --job-name=run_imi
 #SBATCH -N 1
 #SBATCH -c 1
-#SBATCH --mem=2000
+###SBATCH --mem=2000
 #SBATCH --mail-type=BEGIN,END
 #SBATCH --mail-user=c.roberts@sron.nl
 #SBATCH -o "imi_output.log"
