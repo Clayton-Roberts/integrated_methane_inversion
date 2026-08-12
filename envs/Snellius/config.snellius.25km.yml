@@ -2,10 +2,10 @@
 ## Documentation @ https://imi.readthedocs.io/en/latest/getting-started/imi-config-file.html
 
 ## General
-RunName: "Test_25km_Permian" # "Test_25km_Permian"
+RunName: "New_env_25km_Permian"
 Species: "CH4"
 SchedulerType: "slurm"
-SafeMode: false
+SafeMode: true
 S3Upload: false
 UseGCHP: false
 
@@ -96,8 +96,8 @@ CustomPeriodsCSV: "/path/to/periods.csv"
 
 ## State vector
 CreateAutomaticRectilinearStateVectorFile: true
-nBufferClusters: 8
-BufferDeg: 5
+BufferRings: 3
+BufferReductionFactor: 4
 EmisThreshold: 1.e-12
 OptimizeBCs: true
 
@@ -139,25 +139,25 @@ LengthScalePriorCov: 25  ## in km, only used if OffDiagonalPriorCov is true
 
 ## Setup modules
 ##   Turn on/off different steps in setting up the inversion
-RunSetup: false
-SetupTemplateRundir: false
-SetupSpinupRun: false
-SetupJacobianRuns: false
-SetupInversion: false
-SetupPosteriorRun: false
+RunSetup: true
+SetupTemplateRundir: true
+SetupSpinupRun: true
+SetupJacobianRuns: true
+SetupInversion: true
+SetupPosteriorRun: true
 
 ## Run modules
 ##   Turn on/off different steps in performing the inversion
-DoHemcoPriorEmis: false
-DoSpinup: false
-DoJacobian: false
+DoHemcoPriorEmis: true
+DoSpinup: true
+DoJacobian: true
 ReDoJacobian: false
-DoInversion: false
+DoInversion: true
 DoPosterior: true
 
 ## IMI preview
 ##   NOTE: RunSetup must be true to run preview
-DoPreview: false
+DoPreview: true
 DOFSThreshold: 0
 
 ## Resource allocation settings for slurm jobs
@@ -168,13 +168,6 @@ InversionCPUs: 16
 InversionMemory: 20000
 RequestedTime: "0-20:00"
 SchedulerPartition: "rome"
-# Below were the defaults from Harvard.
-# RequestedCPUs: 32
-# RequestedMemory: 32000
-# InversionCPUs: 32
-# InversionMemory: 64000
-# RequestedTime: "24:00:00"
-# SchedulerPartition: "sapphire,huce_cascade,seas_compute,shared"
 
 ## Max number of simultaneous Jacobian runs from the job array (-1: no limit)
 MaxSimultaneousRuns: -1
