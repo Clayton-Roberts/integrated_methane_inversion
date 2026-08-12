@@ -80,6 +80,29 @@ After you've configured your config.yml file, you can also submit the IMI to slu
 
 - An exception to the above is when you run the posterior module. Then, use `--mem=20000` or something larger. Although the posterior simulation is spawned and submitted to slurm via a call to `sbatch` (with its own memory requirement), there are some further calculations that happen directly on the "umbrella" job after that simulation is done that are compute-heavy. It's good to be able to specify the amount of memory you need for the umbrella job via `--mem=`. Otherwise, you're going to get OOM and SIGKILL issues shown in your log file.
 
+## How to update the SRON branch
+
+1. Incorporate whatever new changes have been pushed to Harvard's main branch. 
+```
+git checkout main
+git fetch upstream
+git merge --ff-only upstream/main
+```
+(or do it online with the web browser.)
+
+2. Rebase `sron` into `main`. This is essentially saying "Take the changes we've made here at SRON, and add them on top of whatever changes have happened in the meantime at Harvard."
+```
+git checkout sron
+git rebase main
+```
+
+3. If any of the changes on Harvard's main branch have altered or touched the same areas that we have altered on our `sron` branch, we will get conflicts (which is normal). Git will pause during the rebase, and we will need to fix conflicts mannually, and contiue rebasing with
+
+```
+git add <files>
+git rebase --continue
+```
+
 ## Things to discuss with Matthieu/Shubham: 
 
 1. I altered surc/utilities/common.sh so that submit_slurm_job has --export=ALL in it; this passes the loaded environment .env file through to job nodes. 
