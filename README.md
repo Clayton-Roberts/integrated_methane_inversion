@@ -58,11 +58,27 @@ and edit the last line of imi_env.yml so that the prefix references your own hom
 conda create --file imi_env.yml
 ```
 
-## Extra steps for when you want to set up a project
+## Downloading data for your project
 
 1. You need to have the appropriate boundary condition files downloaded for your project. Check out the script at `/projects/0/src17245/IMI/Inputs/ExtData/GCinput/download_boundary_files.sh` to see how to do this.
 
 2. You need to make sure that you have the GEOS-FP meteorological data to run your simulation. For example, if you were using North American (NA) data at 25km resolution, this data needs to be located at `/projects/0/src17245/IMI/Inputs/ExData/GEOS_0.25x0.3125_NA`, with the appropriate date range in the sub-folders. Importantly, this should NOT be located in the `Meteo` folder; the IMI expects it to be just underneath `ExtData`.
+
+## How to actually run the IMI
+
+#### From the command line on your Snellius login node:
+After you've configured your config.yml file, you can run the IMI by executing `./run_imi.sh envs/Snellius/your_config.yml` in the command line. 
+
+- This runs the IMI actively in your login node. This means that if your login session is terminated, then the IMI will stop running. The IMI may have spawned further jobs via calls to `sbatch` that will have been scheduled on Snellius via slurm; these would continue to run. 
+
+- I would recommend you do this if you're just trying to run the setup modules or a module that you know won't take too long. 
+
+#### Letting sbatch take control of the entire thing
+After you've configured your config.yml file, you can also submit the IMI to slurm via `sbatch -t "0-20:00" --mem=20000 run_imi.sh envs/Snellius/your_config.yml`, where the requested wall time and memory shown here are just examples. 
+
+- This is handy if you want the "umbrella" IMI job to keep running while the sub-modules are run in sequence. This is useful if for exxample you're calculating a Jacobian, which may take some time. The parent job will keep running on Snellius, will wait till the Jacobian is done, and then proceed further with whatever modules need to run. If you did this on a login node you'd have to keep that screen running for a long time. 
+
+- It's also good to run the IMI this way if you're running the posterior module. When the IMI spawns further jobs via `sbatch`, the required memory is specified from those jobs via the config file. However, the final posterior perturbation is run directly from the "umbrella" IMI job; it does not send the posterior module off to run via `sbatch`. So it's good to be able to specify the amount of memory you need via `--mem=`. Otherwise, you're going to get OOM and SIGKILL issues shown in your log file.
 
 ## Things to discuss with Matthieu/Shubham: 
 
@@ -72,9 +88,7 @@ conda create --file imi_env.yml
 
 3. I also needed to alter src/geoschem_run_scripts/submit_jacobian_simulations_array.sh as sbatch is called here directly instead of using the function defined in common.sh; thus, we also needed to include --export=ALL to make sure that our loaded modules are passed through to the job nodes.
 
-4. I think there is an error on line 57 of make_jacobian_icbc.py as this is an incorrectly formatted f-string.
-
-5. Also needed to make some changes to the end of create_simulation_dir to get the HEMCO_Config.rc file to read in the correct methane field.
+4. Also needed to make some changes to the end of create_simulation_dir to get the HEMCO_Config.rc file to read in the correct methane field.
 
 ## References:
 
