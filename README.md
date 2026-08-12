@@ -30,7 +30,7 @@ git submodule update --init –-recursive
 ```
 bash ./Anaconda.sh
 ```
-and accept everything. Then make sure the following is in your .bashrc file in your home directory (make sure to change croberts to your username!):
+and accept everything. Then make sure the following is in your .bashrc file in your home directory (make sure to change `croberts` to your username!):
 ```
 # >>> conda initialize >>>
 # !! Contents within this block are managed by 'conda init' !!
@@ -66,19 +66,19 @@ conda create --file imi_env.yml
 
 ## How to actually run the IMI
 
-#### From the command line on your Snellius login node:
+#### Option 1: from the command line on your Snellius login node:
 After you've configured your config.yml file, you can run the IMI by executing `./run_imi.sh envs/Snellius/your_config.yml` in the command line. 
 
 - This runs the IMI actively in your login node. This means that if your login session is terminated, then the IMI will stop running. The IMI may have spawned further jobs via calls to `sbatch` that will have been scheduled on Snellius via slurm; these would continue to run. 
 
 - I would recommend you do this if you're just trying to run the setup modules or a module that you know won't take too long. 
 
-#### Letting sbatch take control of the entire thing
+#### Option 2: letting sbatch take control of the entire thing
 After you've configured your config.yml file, you can also submit the IMI to slurm via `sbatch -t "0-20:00" --mem=20000 run_imi.sh envs/Snellius/your_config.yml`, where the requested wall time and memory shown here are just examples. 
 
-- This is handy if you want the "umbrella" IMI job to keep running while the sub-modules are run in sequence. This is useful if for exxample you're calculating a Jacobian, which may take some time. The parent job will keep running on Snellius, will wait till the Jacobian is done, and then proceed further with whatever modules need to run. If you did this on a login node you'd have to keep that screen running for a long time. 
+- This is handy if you want the "umbrella" IMI job to keep running while the sub-modules are run in sequence. This is useful if for exxample you're calculating a Jacobian, which may take some time. The parent job will keep running on Snellius, will wait till the Jacobian is done, and then proceed further with whatever modules need to run. If you did this on a login node you'd have to keep that screen running for a long time. In this case, you can probably submit the "umbrella" IMI job with a lower memory request, as the compute-heavy modules like the jacobian calculation are spawned with their own larger memory requirements as specified in the config file.
 
-- It's also good to run the IMI this way if you're running the posterior module. When the IMI spawns further jobs via `sbatch`, the required memory is specified from those jobs via the config file. However, the final posterior perturbation is run directly from the "umbrella" IMI job; it does not send the posterior module off to run via `sbatch`. So it's good to be able to specify the amount of memory you need via `--mem=`. Otherwise, you're going to get OOM and SIGKILL issues shown in your log file.
+- An exception to the above is when you run the posterior module. Then, use `--mem=20000` or something larger. Although the posterior simulation is spawned and submitted to slurm via a call to `sbatch` (with its own memory requirement), there are some further calculations that happen directly on the "umbrella" job after that simulation is done that are compute-heavy. It's good to be able to specify the amount of memory you need for the umbrella job via `--mem=`. Otherwise, you're going to get OOM and SIGKILL issues shown in your log file.
 
 ## Things to discuss with Matthieu/Shubham: 
 
