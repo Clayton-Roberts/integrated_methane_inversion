@@ -2,7 +2,7 @@
 ## Documentation @ https://imi.readthedocs.io/en/latest/getting-started/imi-config-file.html
 
 ## General
-RunName: "New_env_25km_Permian"
+RunName: "test_lognormal_errors_and_clustering"
 Species: "CH4"
 SchedulerType: "slurm"
 SafeMode: true
@@ -106,7 +106,7 @@ OptimizeBCs: true
 PointSourceDatasets: ["SRON"]
 
 ## Clustering Options
-ReducedDimensionStateVector: false
+ReducedDimensionStateVector: true
 DynamicKFClustering: false
 ClusteringMethod: "kmeans"
 NumberOfElements: 45
@@ -127,7 +127,7 @@ ShapeFile: "resources/shapefiles/PermianBasin_Extent_201712.shp"
 ## - PriorErrorOH is a relative fraction (e.g. 0.1 = 10%)
 ## - PriorErrorBCs is in ppb
 ## - PriorErrorBufferElements is only used if LognormalErrors is true
-LognormalErrors: false
+LognormalErrors: true
 PriorError: [0.5]
 PriorErrorBCs: [10.0]
 PriorErrorBufferElements: [0.5]
@@ -141,19 +141,19 @@ LengthScalePriorCov: 25  ## in km, only used if OffDiagonalPriorCov is true
 ##   Turn on/off different steps in setting up the inversion
 RunSetup: true
 SetupTemplateRundir: true
-SetupSpinupRun: true
-SetupJacobianRuns: true
-SetupInversion: true
-SetupPosteriorRun: true
+SetupSpinupRun: false
+SetupJacobianRuns: false
+SetupInversion: false
+SetupPosteriorRun: false
 
 ## Run modules
 ##   Turn on/off different steps in performing the inversion
 DoHemcoPriorEmis: true
-DoSpinup: true
-DoJacobian: true
+DoSpinup: false
+DoJacobian: false
 ReDoJacobian: false
-DoInversion: true
-DoPosterior: true
+DoInversion: false
+DoPosterior: false
 
 ## IMI preview
 ##   NOTE: RunSetup must be true to run preview
