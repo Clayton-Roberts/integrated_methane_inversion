@@ -725,7 +725,7 @@ def estimate_averaging_kernel(
     # calculate sectoral totals if running preview
     if preview:
         get_sectoral_outputs(prior_ds, areas, mask, preview_dir)
-
+    
     # ----------------------------------
     # Observations in region of interest
     # ----------------------------------
@@ -762,7 +762,10 @@ def estimate_averaging_kernel(
     satellite_paths.sort()
 
     # What satellite data product to use?
-    satellite_str = config["SatelliteProduct"]
+    # TODO: We may need to change this back to config["SatelliteProduct"]; there is a PR
+    # coming from the Harvard side that will update the config loading to use the load_config
+    # function, which flattens the config. This would mean that our patch here may break.
+    satellite_str = config[species]["SatelliteProduct"]
 
     # Open satellite files and filter data
     lat = []

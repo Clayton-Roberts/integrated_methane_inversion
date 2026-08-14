@@ -115,9 +115,9 @@ def cluster_data_kmeans(data, num_clusters, mini_batch=False, cluster_by_country
     # Cluster the features using KMeans
     # Mini-Batch k-means is much faster, but with less accuracy
     if mini_batch:
-        kmeans = MiniBatchKMeans(n_clusters=num_clusters, random_state=0)
+        kmeans = MiniBatchKMeans(n_clusters=int(num_clusters), random_state=0)
     else:
-        kmeans = KMeans(n_clusters=num_clusters, random_state=0)
+        kmeans = KMeans(n_clusters=int(num_clusters), random_state=0)
 
     cluster_labels = kmeans.fit_predict(features_weighted)
 
@@ -626,7 +626,7 @@ def update_sv_clusters(config, flat_sensi, orig_sv):
             agg_level = max(1, int(elements_left / n_clusters_fill))
             print("Filling grid with remaining clusters.")
             out_labels = cluster_data_kmeans(
-                sensi.where(labels == 0),
+                sensi['Sensitivities'].where(labels == 0),
                 n_clusters_fill,
                 mini_batch,
                 cluster_by_country,
@@ -644,7 +644,7 @@ def update_sv_clusters(config, flat_sensi, orig_sv):
 
             # generate clusters that are approximately agg_level in size
             out_labels = cluster_data_kmeans(
-                sensi.where(labels == 0),
+                sensi['Sensitivities'].where(labels == 0),
                 n_clusters,
                 mini_batch,
                 cluster_by_country,
@@ -657,7 +657,7 @@ def update_sv_clusters(config, flat_sensi, orig_sv):
         # get the n_highes labels with sensitivities above the
         # threshold and how many elements these labels contain
         n_max_labels, n_highest, num_elements, _ = get_highest_labels_threshold(
-            out_labels, sensi, filter_threshold
+            out_labels, sensi['Sensitivities'].values, filter_threshold
         )
 
         # if too many labels to assign, then we need to assign
