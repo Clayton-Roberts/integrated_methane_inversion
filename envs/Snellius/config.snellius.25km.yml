@@ -2,7 +2,7 @@
 ## Documentation @ https://imi.readthedocs.io/en/latest/getting-started/imi-config-file.html
 
 ## General
-RunName: "test_lognormal_errors_and_clustering"
+RunName: "test_normal_errors_no_clustering"
 Species: "CH4"
 SchedulerType: "slurm"
 SafeMode: true
@@ -106,7 +106,7 @@ OptimizeBCs: true
 PointSourceDatasets: ["SRON"]
 
 ## Clustering Options
-ReducedDimensionStateVector: true
+ReducedDimensionStateVector: false
 DynamicKFClustering: false
 ClusteringMethod: "kmeans"
 NumberOfElements: 45
@@ -117,7 +117,7 @@ PlumeCountFilter: 50
 GroupByCountry: false
 
 ## Custom state vector
-StateVectorFile: "/scratch-shared/croberts/imi_output/Test_25km_Permian/StateVector.nc"
+StateVectorFile: "/scratch-shared/croberts/imi_output/test_lognormal_errors_with_clustering/StateVector.nc"
 ShapeFile: "resources/shapefiles/PermianBasin_Extent_201712.shp"
 
 ## Inversion
@@ -127,7 +127,7 @@ ShapeFile: "resources/shapefiles/PermianBasin_Extent_201712.shp"
 ## - PriorErrorOH is a relative fraction (e.g. 0.1 = 10%)
 ## - PriorErrorBCs is in ppb
 ## - PriorErrorBufferElements is only used if LognormalErrors is true
-LognormalErrors: true
+LognormalErrors: false
 PriorError: [0.5]
 PriorErrorBCs: [10.0]
 PriorErrorBufferElements: [0.5]
@@ -141,23 +141,23 @@ LengthScalePriorCov: 25  ## in km, only used if OffDiagonalPriorCov is true
 ##   Turn on/off different steps in setting up the inversion
 RunSetup: true
 SetupTemplateRundir: true
-SetupSpinupRun: false
-SetupJacobianRuns: false
-SetupInversion: false
-SetupPosteriorRun: false
+SetupSpinupRun: true
+SetupJacobianRuns: true
+SetupInversion: true
+SetupPosteriorRun: true
 
 ## Run modules
 ##   Turn on/off different steps in performing the inversion
 DoHemcoPriorEmis: true
-DoSpinup: false
-DoJacobian: false
+DoSpinup: true
+DoJacobian: true
 ReDoJacobian: false
-DoInversion: false
-DoPosterior: false
+DoInversion: true
+DoPosterior: true
 
 ## IMI preview
 ##   NOTE: RunSetup must be true to run preview
-DoPreview: true
+DoPreview: false
 DOFSThreshold: 0
 
 ## Resource allocation settings for slurm jobs
