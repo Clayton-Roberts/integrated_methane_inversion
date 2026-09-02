@@ -47,12 +47,13 @@ def check_grid_compatibility(lat_min, lat_max, lon_min, lon_max, land_cover_pth)
     return compatible
 
 
-def cluster_buffer_elements(data, offset):
+def cluster_buffer_elements(data, reduction_factor, offset):
     """
     Description:
         Cluster all 0 valued elements in dataarray into desired num clusters
     arguments:
         data       [][]dataarray : xarrray sensitivity data
+        reduction_factor     int : factor by which you want to reduce the number of elements in the buffer rings 
         offset              bool : offset labels by this integer value
     Returns:       [][]dataarray : labeled data
     """
@@ -70,7 +71,7 @@ def cluster_buffer_elements(data, offset):
     valid_indices = np.where(Z == 0)[0]
 
     # Get the number of clusters
-    num_clusters = int(np.floor( len(valid_indices) / 4 ))
+    num_clusters = int(np.floor( len(valid_indices) / reduction_factor ))
 
     # Flatten the latitude and longitude arrays into a 2D grid
     # only keeping valid indices
@@ -287,7 +288,7 @@ def make_state_vector_file(
     # -------------------------------------------------------------------------
     if is_regional:
         statevector = cluster_buffer_elements(
-            statevector, statevector.max().item()
+            statevector, config["BufferReductionFactor"], statevector.max().item()
         )
 
     refyear = 2000
