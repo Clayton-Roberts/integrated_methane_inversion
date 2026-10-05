@@ -201,6 +201,9 @@ setup_template() {
         elif [ "$Res" = "0.125x0.15625" ]; then
            sed -i -e "s:GEOS_0.25x0.3125_NA:GEOS_0.25x0.3125_${RegionID}:g" HEMCO_Config.rc.gmao_metfields_0125
            sed -i -e "s:GEOS_0.125x0.15625_NA:GEOS_0.125x0.15625_${RegionID}:g" HEMCO_Config.rc.gmao_metfields_0125
+           # Need to also modify the filepaths for the meteorology fields in HEMCO_Config.rc.gmao_metfields_0125
+           sed -i -e "s:025x03125.NA:025x03125.${RegionID}:g" HEMCO_Config.rc.gmao_metfields_0125
+           sed -i -e "s:\$RES.NA:\$RES.${RegionID}:g" HEMCO_Config.rc.gmao_metfields_0125
 	fi
    fi
 

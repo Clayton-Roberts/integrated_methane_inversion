@@ -807,6 +807,10 @@ def estimate_averaging_kernel(
     df[species] = xspecies
     df["time"] = trtime
 
+    # Save the pre-computed observations for future use in state vector experimentation.
+    outname = f'{config["OutputPath"]}/{config["RunName"]}/pre_computed_df_observations.csv'
+    df.to_csv(outname,sep=',',index=False)
+
     if config['UseGCHP']:
         df_super = classify_obs_to_cs_grid(df, gridfpath)
         daily_observation_counts = map_obs_to_CSgrid(df_super, gridfpath)
